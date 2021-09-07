@@ -1,9 +1,9 @@
-error_msg = null
 windows = false
 linux = false
 mac = false
 sandbox = false
 staging = false
+error_msg = null
 
 pipeline {
     agent any
@@ -91,6 +91,4 @@ pipeline {
         }
 
     }
-
-
 }
