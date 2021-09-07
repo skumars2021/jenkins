@@ -1,3 +1,4 @@
+
 windows = false
 linux = false
 mac = false
@@ -11,10 +12,14 @@ pipeline {
         choice(defaultValue: 'sandbox', name:'environment', choices: "sandbox\nstaging\nproduction", description: 'Environment to Run tests')
         booleanParam(defaultValue: false, name: 'liverun', description: 'Select type of run:')
         text(defaultValue: 'this is a multi-line string parameter example here', name: 'text: ', description: 'Text to check the value')
-        string(defaultValue: 'Enter the script to run here', name: 'Script : ', trim: true, description: 'Text to check the value')
+        string(defaultValue: 'Enter the script to run here', name: 'scriptline : ', trim: true, description: 'Text to check the value')
     }
-
-    if(params.liverun == true){
+    
+    def run = params.liverun
+    def env = params.environment
+    def txt = params.text
+    def str = params.scriptline
+    if(${run} == true){
         stages {
             stage('Build') {
                 script {
@@ -47,7 +52,7 @@ pipeline {
                 } 
             }
 
-            if(params.liverun == 'sandbox'){
+            if( "${env}" == "sandbox"){
                 parallel {
                     stage('Regression Test with Chrome with linux') {
                         script {
@@ -90,4 +95,5 @@ pipeline {
             
         }
 
-    }
+}
+
