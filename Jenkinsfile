@@ -5,7 +5,7 @@ pipeline {
         choice(choices: ['ONE', 'TWO'], name: 'PARAMETER_01', description: 'Select choice'),
         booleanParam(defaultValue: true, description: '', name: 'PARAMETER_02 booleanParam'),
         text(defaultValue: '''this is a multi-line string parameter example''', name: 'PARAMETER_03 MULTI-LINE-STRING'),
-        string(defaultValue: 'scriptcrunch', name: 'PARAMETER_03 STRING-PARAMETER', trim: true)
+        string(defaultValue: 'scriptcrunch', name: 'PARAMETER_04 STRING-PARAMETER', trim: true)
     }
 
     stages {
