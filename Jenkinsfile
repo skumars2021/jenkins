@@ -1,3 +1,4 @@
+import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
 windows = false
 linux = false
@@ -61,6 +62,7 @@ pipeline {
                                if(params.environment == "sandbox"){
                                    sandbox = true  
                                }
+                               
                             }
                         },
                         "Regression on FF": {
@@ -69,6 +71,7 @@ pipeline {
                                if(params.environment == "staging"){
                                    staging = true  
                                }
+                               
                             }
                         },
                         "Regression on IE": {
@@ -77,6 +80,7 @@ pipeline {
                                if(params.environment == "production"){
                                    production = true  
                                }
+                               
                             }
                             
                         }
@@ -93,6 +97,7 @@ pipeline {
                                 echo "{$sandbox}"
                                     
                                 }
+                                
                             }
                             
                         },
@@ -111,12 +116,32 @@ pipeline {
                                 echo "Deploy to Production Passed"
                                 echo "{$production}"
                                 }
+                                
                             }
                             
                         }
                 )
             }
         }
-        
+        stage("End Build"){
+            steps{
+                script{
+                    try {
+                        echo 'End build Performing steps of  Complited....'
+                        //sh "printenv"
+                        echo "The build number is ${env.BUILD_NUMBER}"
+                        echo "NAME = ${env.NAME}"
+                        echo "running on = ${env.NODE_LABELS}"
+                        commitId = sh(returnStdout: true, script: 'git rev-parse HEAD')
+                        echo "${commitId}"
+                    } catch (e) {
+                        error "${e}"
+                    }
+                    
+                }
+            }
+        }
+
+    
     }
 }
