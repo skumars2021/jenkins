@@ -133,6 +133,7 @@ pipeline {
                         echo "NAME = ${env.NAME}"
                         echo "running on = ${env.NODE_LABELS}"
                         commitId = sh(returnStdout: true, script: 'git rev-parse HEAD')
+                        generate_report_date()
                         echo "${commitId}"
                     } catch (e) {
                         error "${e}"
@@ -144,4 +145,10 @@ pipeline {
 
     
     }
+}
+
+
+def generate_report_date(){
+    def date = new Date().format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
+    echo "${date}"
 }
