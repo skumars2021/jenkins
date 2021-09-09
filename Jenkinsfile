@@ -150,5 +150,5 @@ pipeline {
 
 def generate_report_date(){
     def date = new Date().format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
-    echo "${date}"
+    echo "date with method : ${date}"
 }
